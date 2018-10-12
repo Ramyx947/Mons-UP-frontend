@@ -72,19 +72,7 @@ getTrips = () => {
       <div>
         
         <Container>
-          <div className='top-banner'>
-            {/* { currentUser
-              ? <NavBar currentUser={currentUser} />
-              : <SignInModal
-                getUser={getUser}
-                signIn={signIn}
-                signOut={signOut}
-                openModal={openModal}
-                createUser={createUser}
-              />
-            } */}
-          </div>
-          <div>
+          <div className='trip-details'>
           {
             selectedTrip
               ? <TripCard
@@ -101,14 +89,17 @@ getTrips = () => {
                 selectTrip={selectTrip}
               />
           }
-          <FavouriteTrips 
-            trips={favTrips}
-            removeFromFavoriteTrips={removeFromFavoriteTrips}
-          />
           {/* <Switch>
             <Route exact path='/trips' component={props => <TripsList trips={trips} selectTrip={this.selectTrip}{...props} />} />
             <Route exact path='/trip/:title' component={props => <TripCard trips={trips} deselectTrip={this.deselectTrip}{...props} />} />
           </Switch> */}
+          <div className='row'>
+              <FavouriteTrips
+                trips={favTrips}
+                removeFromFavoriteTrips={removeFromFavoriteTrips}
+              />
+          </div>
+            
           </div>
         </Container>
       </div>
