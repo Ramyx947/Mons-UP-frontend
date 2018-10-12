@@ -17,7 +17,7 @@ const MenuDropDown = () => (
           <Dropdown.Item>All Trips</Dropdown.Item>
           <Dropdown.Divider />
 
-          <Dropdown.Header>My Account</Dropdown.Header>
+
 
           <Dropdown.Item>My Account</Dropdown.Item>
 

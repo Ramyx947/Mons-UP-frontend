@@ -1,10 +1,11 @@
 import React from 'react'
 import { Container } from 'semantic-ui-react'
+import { Route, Switch } from 'react-router-dom'
 import MenuDropDown from './components/MenuDropDown'
 
 import TripsList from './containers/TripsList'
 import UserCard from './components/UserCard'
-
+import FavouriteTrips from './containers/FavouriteTrips'
 import SignInModal from './components/auth/SignInModal'
 import TripCard from './components/TripCard'
 import NavBar from './components/NavBar'
@@ -14,8 +15,8 @@ class HomePage extends React.Component {
     users: [],
     trips: [],
     days: [],
+    favTrips: [],
     currentUser: undefined,
-    showUserData: false,
     searchTrips: '',
     selectedTrip: undefined
   }
@@ -48,19 +49,31 @@ getTrips = () => {
 
   componentDidMount=() => {
     this.getUsers()
+    this.getTrips()
+    this.getDays()
+  }
+  updateFavoriteTrips=(selectedTrip) =>{
+    if (!this.state.favTrips.includes(selectedTrip)){
+      this.setState({favTrips: [...this.state.favTrips, selectedTrip]})
+    }
+  }
+
+  removeFromFavoriteTrips=(id) => {
+    const favTrips = this.state.favTrips.fileter(favTrip => favTrip.id !== id)
+    this.setState({favTrips})
   }
   render () {
-    const { trips, selectedTrip, currentUser, showUserData } = this.state
+    const { trips, selectedTrip, currentUser, favTrips } = this.state
     const {
-      selectTrip, deselectTrip, getUser, signIn, signOut, openModal, createUser
+      selectTrip, deselectTrip, getUser, signIn, signOut, openModal, createUser, updateFavoriteTrips, removeFromFavoriteTrips
     } = this
 
     return (
       <div>
-        <MenuDropDown />
+        
         <Container>
           <div className='top-banner'>
-            { currentUser
+            {/* { currentUser
               ? <NavBar currentUser={currentUser} />
               : <SignInModal
                 getUser={getUser}
@@ -69,8 +82,9 @@ getTrips = () => {
                 openModal={openModal}
                 createUser={createUser}
               />
-            }
+            } */}
           </div>
+          <div>
           {
             selectedTrip
               ? <TripCard
@@ -78,14 +92,23 @@ getTrips = () => {
                 deselectTrip={deselectTrip}
                 currentUser={currentUser}
                 selectedTrip={selectedTrip}
-                showUserData={showUserData}
+                updateFavoriteTrips={updateFavoriteTrips}
               />
+              // && <MenuDropDown />
               : <TripsList
                 trips={trips}
                 selectTrip={selectTrip}
               />
           }
-          {(showUserData === true) ? <UserCard /> : null}
+          <FavouriteTrips 
+            trips={favTrips}
+            removeFromFavoriteTrips={removeFromFavoriteTrips}
+          />
+          {/* <Switch>
+            <Route exact path='/trips' component={props => <TripsList trips={trips} selectTrip={this.selectTrip}{...props} />} />
+            <Route exact path='/trip/:title' component={props => <TripCard trips={trips} deselectTrip={this.deselectTrip}{...props} />} />
+          </Switch> */}
+          </div>
         </Container>
       </div>
     )

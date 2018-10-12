@@ -1,6 +1,6 @@
 import React from 'react'
 import TripCard from '../components/TripCard'
-
+import Search from '../components/Search'
 class TripList extends React.Component {
   render () {
     return (
