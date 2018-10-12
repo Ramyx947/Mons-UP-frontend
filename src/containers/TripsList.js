@@ -1,6 +1,7 @@
 import React from 'react'
 import TripCard from '../components/TripCard'
 import Search from '../components/Search'
+import Trip from '../components/Trip'
 class TripList extends React.Component {
   render () {
     return (
@@ -9,8 +10,9 @@ class TripList extends React.Component {
           this.props.trips.map(trip =>
             <TripCard
               trip={trip}
-              selectTrip={this.props.selectTrip}
-              id={trip.id}
+              // selectTrip={this.props.selectTrip}
+              // id={trip.id}
+              handleClick={() => this.props.selectTrip(trip)}
             />
           )
         }

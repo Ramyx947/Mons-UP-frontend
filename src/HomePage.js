@@ -93,6 +93,7 @@ getTrips = () => {
                 currentUser={currentUser}
                 selectedTrip={selectedTrip}
                 updateFavoriteTrips={updateFavoriteTrips}
+             
               />
               // && <MenuDropDown />
               : <TripsList
