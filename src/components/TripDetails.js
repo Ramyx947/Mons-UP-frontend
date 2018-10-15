@@ -1,11 +1,9 @@
 import React from 'react'
 import {Button} from 'semantic-ui-react'
-import DatePicker from 'react-datepicker'
-import moment from 'moment'
-import 'react-datepicker/dist/react-datepicker.css'
+
 import TripCard from './TripCard'
-import DayCard from './DayCard'
-import Day from './Day'
+import DaysList from '../containers/DaysList'
+
 
 
 export default class TripDetails extends React.Component {
@@ -19,7 +17,7 @@ export default class TripDetails extends React.Component {
     console.log("props at tripDetails", this.props)
     fetch(`http://localhost:3000/api/v1/trips/${this.props.match.params.id}/days`)
       .then(resp => resp.json())
-      .then(days => this.setState({ days }))
+      .then(days => this.setState({days}))
   }
   componentDidMount = () => {
     this.getDays()
@@ -34,13 +32,14 @@ export default class TripDetails extends React.Component {
 
 render(){
   const { trips, match } = this.props 
+  const { days, selectedDay} = this.state
   const trip = trips.find(trip => {
-    console.log(trip.id)
-    console.log(match.params.id)
+    // console.log(trip.id)
+    // console.log(match.params.id)
     return trip.id === parseInt(match.params.id)
   }) || {}
-  console.log('tripdetail props:', this.props)
-  console.log('found trip:', trip)
+  // console.log('tripdetail props:', this.props)
+  // console.log('found trip:', trip)
 
   return(
 <div>
@@ -52,18 +51,15 @@ render(){
     <p> Country: {trip.country}</p>
     <p> City: {trip.city}</p>
     <p> Category: {trip.category}</p>
-  // Links to all the days
 
-  {
-    this.state.selectedDay ?
-    <Day tripDay={this.state.selectedDay}
-      deselectDay={this.deselectDay}
-    /> :
-    <DayCard  
-      days={this.state.days}
-      selectDay={this.selectDay}
-    />
-  }
+      <div className='day-list'>
+
+          <DaysList
+            days={this.state.days}
+            selectDay={this.selectDay}
+            deselectDay={this.deselectDay}
+          />
+      </div>
 
     <div className='buttons'>
         <Button> Create a new trip</Button>

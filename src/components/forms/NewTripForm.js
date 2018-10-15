@@ -1,53 +1,121 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
-class NewTripInput extends Component {
+class NewTripForm extends Component {
   state = {
-    username: '',
-    email: '',
-    password: ''
+   title: '',
+   start_date: '',
+   end_date: '',
+   number_days: '',
+   country: '',
+   city: ''
   }
-
+  // getInitialState() {
+  //   return {
+  //     from: undefined,
+  //     to: undefined,
+  //   };
+  // }
+  // handleDayClick(day) {
+  //   const range = DateUtils.addDayToRange(day, this.state);
+  //   this.setState(range);
+  // }
+  // handleResetClick() {
+  //   this.setState(this.getInitialState());
+  // }
   handleInputChange = (event) => {
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.name]: event.target.value
+    })
+  }
+handleStartDateChange(start_date){
+  this.setState({ start_date: start_date})
+}
+  handleOnSubmit = (event) => {
+    event.preventDefault()
+    fetch('http://localhost:3000/api/v1/trips', 
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          user_id: localStorage.getItem('user_id'),
+          title: this.state.title,
+          start_date: this.state.start_date,
+          end_date: this.state.end_date,
+          number_days: this.state.number_days,
+          country: this.state.country,
+          city: this.state.city
+        })
+      }
+    )
+    .then(res => {
+      const data = res.json()
+      // go to trips/data.id
     })
   }
 
-  handleOnSubmit = (event) => {
-    event.preventDefault()
-    this.props.dispatch({ type: 'ADD_USER', user: this.state })
-  }
-
   render() {
+    const { from, to } = this.state;
+    const modifiers = { start: from, end: to };
     return (
       <form onSubmit={this.handleOnSubmit}>
         <p>
           <input
             type='text'
-            id='username'
+            name='title'
+            value={this.state.title}
             onChange={this.handleInputChange}
-            placeholder='username'
+            placeholder='Trip title'
+          />
+        </p>
+        <input
+          type='date'
+          value={this.state.start_date}
+          name='start_date'
+          onChange={this.handleInputChange}
+          placeholder='Start date (YYYY-MM-DD)'
+        />
+        <input
+          type='date'
+          value={this.state.end_date}
+          name='end_date'
+          onChange={this.handleInputChange}
+          placeholder='End date (YYYY-MM-DD)'
+        />
+        <p>
+        </p>
+        <input
+          type='text'
+          value={this.state.number_days}
+          name='number_days'
+          onChange={this.handleInputChange}
+          placeholder='Total number of days'
+        />
+        <p>
+          <input
+            type='text'
+            value={this.state.country}
+            name='country'
+            onChange={this.handleInputChange}
+            placeholder='Country'
           />
         </p>
         <p>
           <input
-            type='email'
-            id='email'
+            type='text'
+            value={this.state.city}
+            name='city'
             onChange={this.handleInputChange}
-            placeholder='email'
-          />
-          <input
-            type='password'
-            id='password'
-            onChange={this.handleInputChange}
-            placeholder='password'
+            placeholder='City'
           />
         </p>
-        <input type='submit' />
+        <input type='submit'/>
       </form>
+      
     )
   }
 }
 
-export default UserInput
+export default NewTripForm
+       

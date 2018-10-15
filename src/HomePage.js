@@ -4,11 +4,14 @@ import App from './App'
 import TripList from './containers/TripsList'
 
 class HomePage extends Component {
-  
+  state={
+    
+  }
   render () {
     return (
       <div className='HomePage'>
         <h1>HOME PAGE!</h1>
+
         <br/>
         
       

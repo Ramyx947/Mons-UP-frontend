@@ -24,15 +24,7 @@ export default class SignInForm extends React.Component {
 
     return (
       <div>
-        {/* <TextField
-          id='emailInput'
-          label='Email'
-          value={email}
-          onChange={handleChange}
-          margin='normal'
-          name='email'
-          color='primary'
-        /> */}
+       
         <br />
         <button onClick={() => this.props.getUser(email)} variant='contained' color='primary'>
           LOGIN

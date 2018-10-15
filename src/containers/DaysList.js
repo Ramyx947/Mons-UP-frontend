@@ -1,18 +1,19 @@
 import React from 'react'
-import DayCard from '../components/DayCard'
+import Day from '../components/Day'
 
 class DaysList extends React.Component {
   
   render() {
+    const { days, selectDay, deselectDay} = this.props
     return (
       <div className='days'>
         {
           this.props.days.map(day =>
-            <DayCard
-              day={day}
-              selectDay={this.props.selectDay}
-              id={day.id}
-            />
+            // <Day
+            //   day={day}
+            //   selectDay={this.props.selectDay}
+            // />
+            <button onClick={() => selectDay(day)}>{day.title}</button>
           )
         }
       </div>

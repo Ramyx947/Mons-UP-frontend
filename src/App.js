@@ -9,6 +9,7 @@ import TripDetails from './components/TripDetails'
 import SignInModal from './components/auth/SignInModal'
 import NavBar from './components/NavBar'
 import Loading from './components/Loading'
+import NewTripForm from './components/forms/NewTripForm'
 import HomePage from './HomePage'
 
 class App extends React.Component {
@@ -28,6 +29,8 @@ selectTrip = (id) => {
 deselectTrip = () => {
   this.setState({ selectedTrip: undefined })
 }
+
+
 
 getTrips = () => {
   return fetch('http://localhost:3000/api/v1/trips')
@@ -96,6 +99,7 @@ currentUser={this.state.currentUser}
 <div className='trip-details'>
  <Switch>
     <Route exact path='/' render={props => <HomePage {...props} />} />
+    <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
     <Route exact path='/trips' render={props => <TripsList trips={this.state.trips} selectTrip={this.selectTrip} {...props} />} />
     <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} {...props} />} />
  </Switch> 

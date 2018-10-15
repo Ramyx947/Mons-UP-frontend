@@ -1,24 +1,22 @@
-import React from 'react'
-import TripCard from './TripCard'
-import Day from './Day'
-class DayCard extends React.Component {
+// import React from 'react'
+// import TripCard from './TripCard'
+// import Day from './Day'
+// class DayCard extends React.Component {
 
 
 
-  render(){
-    const { days, selectedDay } = this.props
+//   render(){
+//     const { day, selectDay } = this.props
     
-    return (
-      <div className='day-cards'>
-        
-        {
-          days.map((day) =>
-          <Day day={day} />
-          )
-        }
-
-      </div>
-    )
-  }
-}
-export default DayCard
+//     return (
+//       <div 
+//       className='day-cards'
+//       onClick={() => selectDay(day)}
+//       >
+//       {this.day.title}
+//           <Day day={day} />
+//       </div>
+//     )
+//   }
+// }
+// export default DayCard
