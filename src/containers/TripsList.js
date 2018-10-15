@@ -1,23 +1,21 @@
 import React from 'react'
+
 import TripCard from '../components/TripCard'
-import Search from '../components/Search'
-import Trip from '../components/Trip'
-class TripList extends React.Component {
-  render () {
+
+const TripList = ({ trips, selectTrip }) => {
     return (
-      <div className='trips'>
+      <div>
+        <h1>TRIP LIST!</h1>
         {
-          this.props.trips.map(trip =>
+          trips.map((trip) =>   
             <TripCard
               trip={trip}
-              // selectTrip={this.props.selectTrip}
-              // id={trip.id}
-              handleClick={() => this.props.selectTrip(trip)}
+              key={trip.id}
+              handleClick={() => selectTrip(trip)}
             />
           )
         }
       </div>
     )
-  }
 }
 export default TripList

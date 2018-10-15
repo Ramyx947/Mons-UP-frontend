@@ -1,9 +1,11 @@
 import React from 'react'
-
+import UserInput from './forms/UserInput'
 const UserCard = (props) => {
   return (
 
-    <div>~~xxx~~</div>
+    <div>~~xxx~~
+      <UserInput />
+    </div>
 
   )
 }
