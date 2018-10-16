@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'semantic-ui-react'
+import {Button, Segment} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import TripCard from './TripCard'
@@ -12,7 +12,6 @@ export default class TripDetails extends React.Component {
   state = {
     days: [],
     selectedDay: undefined,
-    accommodation: []
   }
 
   getDays = () => {
@@ -24,22 +23,6 @@ export default class TripDetails extends React.Component {
   componentDidMount = () => {
     this.getDays()
   }
-  
-
-  // getAccommodation = () => {
-  //   return fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/days/${this.props.day.date}`)
-  //   .then(res => resp.json())
-  //   .then(day => {
-  //     let sortedAccommodation = day.accommodation.sort((accom1, accom2) => {
-  //       return (accom1.id -accom2.id)
-  //     })
-  //     this.setState({accommodation: sortedAccommodation})
-  //   })
-  //   }
-  // }
-  // addAccommodation = () => {
-  //   return fetch('http://localhost:3000/api/v1/accommodation')
-  // }
 
   selectDay = (day) => {
     this.setState({ selectedDay: day })
@@ -60,7 +43,8 @@ render(){
   // console.log('found trip:', trip)
 
   return(
-<div>
+    <div>
+    <Segment> 
     <h2> Trip details</h2>
     <h1>Title: {trip.title}</h1>
     <p> Start date: {trip.start_date}</p>
@@ -69,9 +53,9 @@ render(){
     <p> Country: {trip.country}</p>
     <p> City: {trip.city}</p>
     <p> Category: {trip.category}</p>
-
+</Segment>
+<Segment secondary> 
       <div className='day-list'>
-
           <DaysList
             trip={trip}
             days={this.state.days}
@@ -79,18 +63,24 @@ render(){
             deselectDay={this.deselectDay}
           />
       </div>
+  </Segment>
 
+  <Segment tertiary> 
     <div className='buttons'>
         <Link to={'/trips/new'}>
           <Button> Create a new trip</Button>
         </Link>
         <Link to={'/trips/${trip.id}/update'}>
-        <Button> Edit trip</Button>
+          <Button> Edit trip</Button>
         </Link>
         <Link to={'/trips'} >
-        <Button > Back to trips</Button>
+          <Button > Back to trips</Button>
+        </Link>
+        <Link to={`/trips/${trip.id}`}> 
+         <Button> Delete trip</Button>
         </Link>
     </div>
+</Segment>
   </div>
     )
   }

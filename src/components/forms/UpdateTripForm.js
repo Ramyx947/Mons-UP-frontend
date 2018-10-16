@@ -41,9 +41,9 @@ this.UpdateTripForm(this.state)
     const modifiers = { start: from, end: to };
     return (
       <div> 
-        <h2>Create a new trip</h2>
-      <form onSubmit={this.handleOnSubmit}>
        
+      <form onSubmit={this.handleOnSubmit}>
+          <h2>Update trip</h2>
         <p>
           <label> Title:</label>
           <input
@@ -55,7 +55,8 @@ this.UpdateTripForm(this.state)
           />
         </p>
         <p>
-          <label> Start date:</label>
+          <p> Dates:</p>
+          <label> Start date</label>
         <input
           type='date'
           value={this.state.start_date}
@@ -101,7 +102,10 @@ this.UpdateTripForm(this.state)
             placeholder='City'
           />
         </p>
-        <input type='submit'/>
+        <input type='submit'
+          onClick={(event) => {event.preventDefault()
+          this.props.updateTrip()}}
+        />
       </form>
         <Link to={'/trips'} >
           <Button > Back to trips</Button>

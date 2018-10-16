@@ -22,15 +22,8 @@ class App extends React.Component {
     trips: [],
     currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     selectedTrip: undefined,
-    toggleSideBar: false,
     searchTrips: ''
   }
-
-  // getCurrentUser = (username, password) => {
-  //   return fetch(`http://localhost:3000/api/v1/users/${user.id}`)
-  //     .then(resp => resp.json())
-  //     .then(currentUser => this.setState({ currentUser}))
-  // }
 
 
 selectTrip = (id) => {
@@ -40,7 +33,6 @@ selectTrip = (id) => {
 deselectTrip = () => {
   this.setState({ selectedTrip: undefined })
 }
-
 
 getTrips = () => {
   return fetch('http://localhost:3000/api/v1/trips')
@@ -66,8 +58,8 @@ getTrips = () => {
 //   this.setState({searchTrips})
 // }
 
-  signIn = (username, email, password) => {
-    console.log(username, email, password)
+  signIn = (username, password) => {
+    console.log(username, password)
     return fetch('http://localhost:3000/api/v1/users/signin', 
       {
         method: 'POST',
@@ -91,10 +83,12 @@ getTrips = () => {
         
       })
   }
+
   signOut = ()=>{
     this.setState({currentUser: undefined})
+    localStorage.removeItem('token')
   }
-  
+
 
   render () {
    
@@ -104,9 +98,12 @@ getTrips = () => {
 return (
 <div className='ui grid container'>
 <Container>
+  <br/>
+  <br/>
 <NavBar 
 getUser={this.signIn}
 currentUser={this.state.currentUser}
+signOut={this.signOut}
 />
 
 <div className='trip-details'>
@@ -114,6 +111,7 @@ currentUser={this.state.currentUser}
     <Route exact path='/' render={props => <HomePage  {...props} />} />
     <Route exact path='/users/signIn' render={props => <SignInForm signIn={this.signIn} {...props} />} />
     <Route exact path='/users/signUp' render={props => <SignUpForm signIn={this.signIn} {...props} />} />
+
     <Route exact path='/users/signOut' render={props => <SignInForm signOut={this.signOut} {...props} />} /> */}
     <Route exact path='/trips/browse_public_trips' render={props => <BrowsePublicTrips signOut={this.signOut} {...props} />} />
 

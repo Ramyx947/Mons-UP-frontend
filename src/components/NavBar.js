@@ -1,50 +1,43 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Menu } from 'semantic-ui-react'
 
 import SignInForm from './auth/SignInForm'
 
 
 class NavBar extends React.Component {
 
-  state = {
-    showNavbar: false
-  }
-toggleNavbar = () => {
-  this.setState({showNavbar: !this.state.showNavbar})
-}
-
-
   render() {
   
     const { currentUser, getUser } = this.props
 
   return (
-    <Fragment>
-   <nav className='nav-bar'>
-      <div className='dropdown'>
-      <br/>
-      <br/>
-          <p>{currentUser.username && `Hello, ${currentUser.username}`} </p>
-          <div>
 
-         
-        <button 
-        className='drop-down-button'
-        onClick={this.toggleNavbar}> 
-        Menu</button>
+  <Menu>
+   
+          <br/>
+
+          <div>
+        <br />
+        <br />
+
+        
+        
         {
-          this.state.showNavbar && this.props.currentUser? 
-           (<div className='dropdown_currentuser_content'>
-              
-                <Link to='/trips'> 
-                    <button>See trips</button>
-                </Link>
-                <Link to='/signOut'>
-                    <button>Sign out</button>
-                </Link>
-            </div>)
+         this.props.currentUser ? 
+                (
+                  <div> 
+                <h3>{currentUser.username && `Hello, ${currentUser.username}`} </h3>
+                <button> Menu</button>
+                  <Link to='/trips'> 
+                      <button>See trips</button>
+                  </Link>
+                  <Link to='/users/signOut'>
+                      <button onClick={this.props.signOut}>Sign out</button>
+                  </Link>
+                  </div>
+                )
              :
             (<div className='dropdown_user_content'>
                 <Link to='/users/signIn'>
@@ -60,9 +53,7 @@ toggleNavbar = () => {
           </div>)
             }
           </div>
-      </div>
-    </nav>
-    </Fragment>
+    </Menu>
   )
           }
 }
