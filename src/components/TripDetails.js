@@ -11,7 +11,8 @@ export default class TripDetails extends React.Component {
 
   state = {
     days: [],
-    selectedDay: undefined
+    selectedDay: undefined,
+    accommodation: []
   }
 
   getDays = () => {
@@ -23,6 +24,22 @@ export default class TripDetails extends React.Component {
   componentDidMount = () => {
     this.getDays()
   }
+  
+
+  // getAccommodation = () => {
+  //   return fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/days/${this.props.day.date}`)
+  //   .then(res => resp.json())
+  //   .then(day => {
+  //     let sortedAccommodation = day.accommodation.sort((accom1, accom2) => {
+  //       return (accom1.id -accom2.id)
+  //     })
+  //     this.setState({accommodation: sortedAccommodation})
+  //   })
+  //   }
+  // }
+  // addAccommodation = () => {
+  //   return fetch('http://localhost:3000/api/v1/accommodation')
+  // }
 
   selectDay = (day) => {
     this.setState({ selectedDay: day })
@@ -67,7 +84,9 @@ render(){
         <Link to={'/trips/new'}>
           <Button> Create a new trip</Button>
         </Link>
+        <Link to={'/trips/${trip.id}/update'}>
         <Button> Edit trip</Button>
+        </Link>
         <Link to={'/trips'} >
         <Button > Back to trips</Button>
         </Link>

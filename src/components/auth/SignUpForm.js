@@ -1,12 +1,11 @@
 import React from 'react'
 
-// import TextField from '@material-ui/core/TextField'
-// import Button from '@material-ui/core/Button'
 
 class SignUpForm extends React.Component {
   state = {
     username: undefined,
-    email: undefined
+    email: undefined,
+    password: undefined
   }
 
   handleChange = (event) => {
@@ -14,36 +13,46 @@ class SignUpForm extends React.Component {
   }
 
   render () {
-    const { name, email } = this.state
+    const { username, password, email } = this.state
 
     return (
       <div>
-        {/* <TextField
-          id='nameInput'
-          label='Name'
-          value={name}
+          <input
+            id='nameInput'
+            label='Name'
+            value={username}
+            onChange={this.handleChange}
+            margin='normal'
+            name='username'
+            color='primary'
+          />
+          <br />
+          <input
+            id='emailInput'
+            label='Email'
+            value={email}
+            onChange={this.handleChange}
+            margin='normal'
+            name='email'
+            color='primary'
+          />
+        <input
+          id='password'
+          label='password'
+          value={password}
           onChange={this.handleChange}
           margin='normal'
-          name='name'
+          name='password'
           color='primary'
         />
         <br />
-        <TextField
-          id='emailInput'
-          label='Email'
-          value={email}
-          onChange={this.handleChange}
-          margin='normal'
-          name='email'
-          color='primary'
-        /> */}
-        <br />
-        <button onClick={() => this.props.createUser(name, email)}
+        <button onClick={() => this.props.signIn(username, email, password)}
           variant='contained'
           color='primary'>
           SIGN UP
         </button>
       </div>
+      
     )
   }
 }

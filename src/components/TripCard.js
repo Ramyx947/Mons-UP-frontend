@@ -1,7 +1,7 @@
 import React from 'react'
 import {Divider, Image} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-import DayCard from './DayCard'
+
 import { SyncLoopHook } from 'tapable';
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactModalLogin from 'react-modal-login'
-import { Header, Icon, Modal, Image, Input } from 'semantic-ui-react'
+
+import { Header, Icon, Image, Input } from 'semantic-ui-react'
 
 
 
@@ -40,7 +40,7 @@ export default class SignInForm extends React.Component {
           color='primary'
         /> 
         <br />
-        <button onClick={() => this.props.getUser(username, password)} variant='contained' color='primary'>
+        <button onClick={() => this.props.signIn(username, password)} variant='contained' color='primary'>
           LOGIN
         </button>
       </div>

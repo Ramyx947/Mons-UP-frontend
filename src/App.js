@@ -1,27 +1,38 @@
 import React from 'react'
 import { Container, Header, Menu, Segment, Icon, Button, Divider } from 'semantic-ui-react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import MenuDropDown from './components/MenuDropDown'
+
 
 import TripsList from './containers/TripsList'
 import TripCard from './components/TripCard'
 import TripDetails from './components/TripDetails'
-import SignInModal from './components/auth/SignInModal'
+import BrowsePublicTrips from './components/BrowsePublicTrips'
 import NavBar from './components/NavBar'
 import Loading from './components/Loading'
-import NewTripForm from './components/forms/NewTripForm'
+import TripForm from './components/forms/TripForm'
+import UpdateTripForm from './components/forms/UpdateTripForm'
+import SignInForm from './components/auth/SignInForm'
+import SignUpForm from './components/auth/SignUpForm'
+
 import HomePage from './HomePage'
 
 class App extends React.Component {
   state = {
     trips: [],
-    currentUser: undefined,
+    currentUser: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : undefined,
     selectedTrip: undefined,
     toggleSideBar: false,
     searchTrips: ''
   }
 
-  // selecting
+  // getCurrentUser = (username, password) => {
+  //   return fetch(`http://localhost:3000/api/v1/users/${user.id}`)
+  //     .then(resp => resp.json())
+  //     .then(currentUser => this.setState({ currentUser}))
+  // }
+
+
 selectTrip = (id) => {
   return this.state.trips.find(trip => trip.id === parseInt(id, 10))
 }
@@ -29,7 +40,6 @@ selectTrip = (id) => {
 deselectTrip = () => {
   this.setState({ selectedTrip: undefined })
 }
-
 
 
 getTrips = () => {
@@ -41,35 +51,7 @@ getTrips = () => {
   componentDidMount=() => {
     this.getTrips()
   }
-  //view side bar
-toggleSideBarVisibility = () => {
-  this.setState({toggleSideBar: !this.state.toggleSideBar})
-}
-// hide side bar
-handleSideBar = () => {
-  this.setState({ toggleSideBar: false})
-}
 
-// sideBarButtons (){
-//   const pageURL = window.location.href
-//   switch(pageURL){
-//     case 'http://localhost:3000/api/v1/trips' :
-//     return (
-//         <>
-//           <Menu.Item as='a'>Change trip</Menu.Item>
-//           <Menu.Item as='a'>Log out</Menu.Item>
-//         </>
-//       )
-//     default:
-//       return (
-//         <>
-//           <Menu.Item as='a'>Home</Menu.Item>
-//           <Menu.Item as='a'>See all trips</Menu.Item>
-//           <Menu.Item as='a'>Log out</Menu.Item>
-//         </>
-//       )
-//   }
-// }
 
 // filterTrips = () => {
 //   this.state.trips.filter( trip =>{
@@ -84,9 +66,9 @@ handleSideBar = () => {
 //   this.setState({searchTrips})
 // }
 
-  signIn = (username, password) => {
-    console.log(username, password)
-    fetch('http://localhost:3000/api/v1/signin', 
+  signIn = (username, email, password) => {
+    console.log(username, email, password)
+    return fetch('http://localhost:3000/api/v1/users/signin', 
       {
         method: 'POST',
         headers: {
@@ -98,16 +80,26 @@ handleSideBar = () => {
       }
     )
       .then(res => res.json())
-      .then(user => this.setState({currentUser: user}, () => window.localStorage.setItem('user', JSON.stringify(user))))
+      .then(user => {
+        
+        this.setState({currentUser: user}, 
+          () => { 
+            window.localStorage.setItem('user', JSON.stringify(user))
+            window.location = '/trips'
+          }
+        )
+        
+      })
   }
-  signOut = (){
+  signOut = ()=>{
     this.setState({currentUser: undefined})
   }
+  
 
   render () {
    
     const { trips, selectedTrip, currentUser} = this.state
-    const { selectTrip, deselectTrip, createUser } = this
+    const { selectTrip, deselectTrip, createUser, signIn, signOut } = this
 
 return (
 <div className='ui grid container'>
@@ -119,10 +111,20 @@ currentUser={this.state.currentUser}
 
 <div className='trip-details'>
  <Switch>
-    <Route exact path='/' render={props => <HomePage signIn={this.signIn} signOut={this.signOut} {...props} />} />
-    <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
+    <Route exact path='/' render={props => <HomePage  {...props} />} />
+    <Route exact path='/users/signIn' render={props => <SignInForm signIn={this.signIn} {...props} />} />
+    <Route exact path='/users/signUp' render={props => <SignUpForm signIn={this.signIn} {...props} />} />
+    <Route exact path='/users/signOut' render={props => <SignInForm signOut={this.signOut} {...props} />} /> */}
+    <Route exact path='/trips/browse_public_trips' render={props => <BrowsePublicTrips signOut={this.signOut} {...props} />} />
+
+    <Route exact path='/trips/new' render={props => <TripForm {...props} />} />
+    <Route exact path='/trips/${trip.id}/edit' render={props => <UpdateTripForm {...props} />} />
+
     <Route exact path='/trips' render={props => <TripsList trips={this.state.trips} selectTrip={this.selectTrip} {...props} />} />
     <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} {...props} />} />
+
+    {/* <Route exact path='/users/account' render={props => <Account account={this.account}  {...props} />} /> */}
+
  </Switch> 
 </div>
 </Container>

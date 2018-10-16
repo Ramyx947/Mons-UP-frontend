@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Day = ({ day, }) => {
+const Day = ({ day }) => {
 
   return(
     <div className="day-details">
@@ -14,9 +15,13 @@ const Day = ({ day, }) => {
       <h3>Notes:</h3>
         <p> {day.notes}</p>
       <div>
-        
+        {/* <Link to={`/`} */}
         <button> Edit day </button>
-        <button> Delete day </button>
+
+
+        {/* <Link to={`/trips/${trip.id}/days/${day.id}`}>
+          <button onClick={() => selectDay(day)}>{day.title}</button>
+        </Link> */}
       </div>
     </div>
    

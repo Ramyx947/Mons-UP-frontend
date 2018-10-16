@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import 'react-day-picker/lib/style.css';
 import { withRouter } from 'react-router-dom'
 
-class NewTripForm extends Component {
+class TripForm extends Component {
   state = {
    title: '',
    start_date: '',
@@ -17,19 +17,7 @@ class NewTripForm extends Component {
    country: '',
    city: ''
   }
-  // getInitialState() {
-  //   return {
-  //     from: undefined,
-  //     to: undefined,
-  //   };
-  // }
-  // handleDayClick(day) {
-  //   const range = DateUtils.addDayToRange(day, this.state);
-  //   this.setState(range);
-  // }
-  // handleResetClick() {
-  //   this.setState(this.getInitialState());
-  // }
+  
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -131,5 +119,5 @@ handleStartDateChange(start_date){
   }
 }
 
-export default NewTripForm
+export default TripForm
        

@@ -11,7 +11,7 @@ class HomePage extends Component {
     return (
       <div className='HomePage'>
         <h1>HOME PAGE!</h1>
-
+        <TripList />
         <br/>
         
       
