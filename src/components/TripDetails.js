@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 import TripCard from './TripCard'
 import DaysList from '../containers/DaysList'
@@ -55,6 +56,7 @@ render(){
       <div className='day-list'>
 
           <DaysList
+            trip={trip}
             days={this.state.days}
             selectDay={this.selectDay}
             deselectDay={this.deselectDay}
@@ -62,11 +64,13 @@ render(){
       </div>
 
     <div className='buttons'>
-        <Button> Create a new trip</Button>
+        <Link to={'/trips/new'}>
+          <Button> Create a new trip</Button>
+        </Link>
         <Button> Edit trip</Button>
-        <Button> Delete trip</Button>
-        <Button> Add trip to calendar</Button>
+        <Link to={'/trips'} >
         <Button > Back to trips</Button>
+        </Link>
     </div>
   </div>
     )

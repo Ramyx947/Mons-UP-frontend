@@ -50,39 +50,59 @@ handleSideBar = () => {
   this.setState({ toggleSideBar: false})
 }
 
-sideBarButtons (){
-  const pageURL = window.location.href
-  switch(pageURL){
-    case 'http://localhost:3000/api/v1/trips' :
-    return (
-        <>
-          <Menu.Item as='a'>Change trip</Menu.Item>
-          <Menu.Item as='a'>Log out</Menu.Item>
-        </>
-      )
-    default:
-      return (
-        <>
-          <Menu.Item as='a'>Home</Menu.Item>
-          <Menu.Item as='a'>See all trips</Menu.Item>
-          <Menu.Item as='a'>Log out</Menu.Item>
-        </>
-      )
+// sideBarButtons (){
+//   const pageURL = window.location.href
+//   switch(pageURL){
+//     case 'http://localhost:3000/api/v1/trips' :
+//     return (
+//         <>
+//           <Menu.Item as='a'>Change trip</Menu.Item>
+//           <Menu.Item as='a'>Log out</Menu.Item>
+//         </>
+//       )
+//     default:
+//       return (
+//         <>
+//           <Menu.Item as='a'>Home</Menu.Item>
+//           <Menu.Item as='a'>See all trips</Menu.Item>
+//           <Menu.Item as='a'>Log out</Menu.Item>
+//         </>
+//       )
+//   }
+// }
+
+// filterTrips = () => {
+//   this.state.trips.filter( trip =>{
+//     const title = trip.title.toLowerCase()
+//     const option = trip.option.toLowerCase()
+//     const searchTrips = this.state.searchTrips.toLowerCase()
+
+//     return option.includes(searchTrips) || title.includes(searchTrips)
+//   })}
+
+// updateSearch= (searchTrips) => {
+//   this.setState({searchTrips})
+// }
+
+  signIn = (username, password) => {
+    console.log(username, password)
+    fetch('http://localhost:3000/api/v1/signin', 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: username
+        })
+      }
+    )
+      .then(res => res.json())
+      .then(user => this.setState({currentUser: user}, () => window.localStorage.setItem('user', JSON.stringify(user))))
   }
-}
-
-filterTrips = () => {
-  this.state.trips.filter( trip =>{
-    const title = trip.title.toLowerCase()
-    const option = trip.option.toLowerCase()
-    const searchTrips = this.state.searchTrips.toLowerCase()
-
-    return option.includes(searchTrips) || title.includes(searchTrips)
-  })}
-
-updateSearch= (searchTrips) => {
-  this.setState({searchTrips})
-}
+  signOut = (){
+    this.setState({currentUser: undefined})
+  }
 
   render () {
    
@@ -93,12 +113,13 @@ return (
 <div className='ui grid container'>
 <Container>
 <NavBar 
+getUser={this.signIn}
 currentUser={this.state.currentUser}
 />
 
 <div className='trip-details'>
  <Switch>
-    <Route exact path='/' render={props => <HomePage {...props} />} />
+    <Route exact path='/' render={props => <HomePage signIn={this.signIn} signOut={this.signOut} {...props} />} />
     <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
     <Route exact path='/trips' render={props => <TripsList trips={this.state.trips} selectTrip={this.selectTrip} {...props} />} />
     <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} {...props} />} />

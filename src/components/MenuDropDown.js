@@ -1,5 +1,6 @@
 import React from 'react'
 import { Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { Route, Switch, Link } from 'react-router-dom'
 
 const MenuDropDown = () => (
   <div>
@@ -7,13 +8,13 @@ const MenuDropDown = () => (
       <Dropdown item icon='align justify' simple>
         <Dropdown.Menu>
           <Dropdown.Item>
-            <Icon name='home' />
-            <span className='text'>Home</span>
-
-            <Dropdown.Menu>
-            </Dropdown.Menu>
-          </Dropdown.Item>
-          
+            <Link to={ '/'}>
+            HomePage
+            </Link>
+            <Link to={'/signOut'}>
+              HomePage
+            </Link>
+            
           <Dropdown.Item>All Trips</Dropdown.Item>
           <Dropdown.Divider />
 

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DayPicker from 'react-day-picker';
+import { Button } from 'semantic-ui-react'
+
+import { Link } from 'react-router-dom'
+
 import 'react-day-picker/lib/style.css';
+import { withRouter } from 'react-router-dom'
 
 class NewTripForm extends Component {
   state = {
@@ -38,8 +43,11 @@ handleStartDateChange(start_date){
     fetch('http://localhost:3000/api/v1/trips', 
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          user_id: localStorage.getItem('user_id'),
+          user_id: JSON.parse(localStorage.getItem('user')).id,
           title: this.state.title,
           start_date: this.state.start_date,
           end_date: this.state.end_date,
@@ -59,7 +67,10 @@ handleStartDateChange(start_date){
     const { from, to } = this.state;
     const modifiers = { start: from, end: to };
     return (
+      <div> 
+        <h2>Create a new trip</h2>
       <form onSubmit={this.handleOnSubmit}>
+       
         <p>
           <input
             type='text'
@@ -112,7 +123,10 @@ handleStartDateChange(start_date){
         </p>
         <input type='submit'/>
       </form>
-      
+        <Link to={'/trips'} >
+          <Button > Back to trips</Button>
+        </Link>
+      </div>
     )
   }
 }

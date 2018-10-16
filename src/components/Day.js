@@ -14,6 +14,7 @@ const Day = ({ day, }) => {
       <h3>Notes:</h3>
         <p> {day.notes}</p>
       <div>
+        
         <button> Edit day </button>
         <button> Delete day </button>
       </div>
