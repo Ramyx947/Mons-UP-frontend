@@ -19,7 +19,9 @@ export default class SignInForm extends React.Component {
     const { handleChange } = this
 
     return (
-      <div>
+      <div class="login-page">
+        <div class="form">
+          <form class="signin-form">
         <Input
           id='nameInput'
           label='Username'
@@ -43,6 +45,9 @@ export default class SignInForm extends React.Component {
         <button onClick={() => this.props.signIn(username, password)} variant='contained' color='primary'>
           LOGIN
         </button>
+        </form>
+        
+        </div>
       </div>
 
     )

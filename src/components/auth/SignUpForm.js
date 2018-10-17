@@ -16,10 +16,12 @@ class SignUpForm extends React.Component {
     const { username, password, email } = this.state
 
     return (
-      <div>
+      <div class="login-page">
+        <div class="form">
+          <form class="register-form">
+            <label> Username:</label>
           <input
             id='nameInput'
-            label='Name'
             value={username}
             onChange={this.handleChange}
             margin='normal'
@@ -27,18 +29,9 @@ class SignUpForm extends React.Component {
             color='primary'
           />
           <br />
-          <input
-            id='emailInput'
-            label='Email'
-            value={email}
-            onChange={this.handleChange}
-            margin='normal'
-            name='email'
-            color='primary'
-          />
+          <label> Password:</label>
         <input
           id='password'
-          label='password'
           value={password}
           onChange={this.handleChange}
           margin='normal'
@@ -46,11 +39,13 @@ class SignUpForm extends React.Component {
           color='primary'
         />
         <br />
-        <button onClick={() => this.props.signIn(username, email, password)}
+        <button onClick={() => this.props.signIn(username, password)}
           variant='contained'
           color='primary'>
           SIGN UP
         </button>
+          </form>
+        </div>
       </div>
       
     )
