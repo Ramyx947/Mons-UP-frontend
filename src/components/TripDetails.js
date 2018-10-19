@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom'
 import TripCard from './TripCard'
 import DaysList from '../containers/DaysList'
 
-
-
 export default class TripDetails extends React.Component {
 
   state = {
@@ -53,6 +51,8 @@ render(){
     <p> Country: {trip.country}</p>
     <p> City: {trip.city}</p>
     <p> Category: {trip.category}</p>
+    <p> Difficulty: {trip.difficulty}</p>
+
 </Segment>
 <Segment secondary> 
       <div className='day-list'>

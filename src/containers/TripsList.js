@@ -5,7 +5,6 @@ const TripList = ({ trips, selectTrip }) => {
     return (
       <div>
         <h1>TRIP LIST</h1>
-        
         {
           trips.map((trip) =>   
             <TripCard

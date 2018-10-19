@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { Header, Icon, Image, Input } from 'semantic-ui-react'
-
-
+import { Header, Button, Form, Icon, Image, Input } from 'semantic-ui-react'
 
 export default class SignInForm extends React.Component {
   state = {
@@ -19,36 +17,31 @@ export default class SignInForm extends React.Component {
     const { handleChange } = this
 
     return (
-      <div class="login-page">
-        <div class="form">
-          <form class="signin-form">
-        <Input
-          id='nameInput'
-          label='Username'
-          value={username}
-          onChange={this.handleChange}
-          margin='normal'
-          name='username'
-          color='primary'
-        />
-        <br />
-        <Input
-          id='passwordInput'
-          label='Password'
-          value={password}
-          onChange={this.handleChange}
-          margin='normal'
-          name='password'
-          color='primary'
-        /> 
-        <br />
-        <button onClick={() => this.props.signIn(username, password)} variant='contained' color='primary'>
-          LOGIN
-        </button>
-        </form>
-        
-        </div>
-      </div>
+      <Form>
+        <Form.Field>
+          <label> Username:</label>
+          <Form.Input 
+            id ='usernameInput'
+            placeholder='Username'
+            margin='normal'
+            name='username'
+            onChange={(e) => this.setState({username: e.target.value})}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label> Password</label>
+          <Form.Input 
+            id='passwordInput'
+            placeholder='Password'
+            margin='normal'
+            name='password'
+            type='password'
+          />
+        </Form.Field>
+         <Button variant='contained' onClick={() => this.props.signIn(this.state.email)}>
+            Log In
+        </Button>
+      </Form>
 
     )
   }
