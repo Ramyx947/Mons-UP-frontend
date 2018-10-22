@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { Header, Button, Form, Icon, Image, Input } from 'semantic-ui-react'
+
+import { Button, Form, Grid, Header, Image, Message, Segment, Input} from 'semantic-ui-react'
 
 export default class SignInForm extends React.Component {
   state = {
@@ -12,37 +14,72 @@ export default class SignInForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  // handleSubmit = () => {
+  //   const {username} this.state
+  //   this.props.signIn(name, password)
+  // }
+
   render () {
     const { username, password } = this.state
     const { handleChange } = this
-
+    const {signIn, signUp} = this.props
+    console.log('SignInForm props:', this.props)
     return (
-      <Form>
-        <Form.Field>
-          <label> Username:</label>
-          <Form.Input 
-            id ='usernameInput'
-            placeholder='Username'
-            margin='normal'
-            name='username'
-            onChange={(e) => this.setState({username: e.target.value})}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label> Password</label>
-          <Form.Input 
-            id='passwordInput'
-            placeholder='Password'
-            margin='normal'
-            name='password'
-            type='password'
-          />
-        </Form.Field>
-         <Button variant='contained' onClick={() => this.props.signIn(this.state.email)}>
-            Log In
-        </Button>
-      </Form>
+      <div className='signin-form'>
+        <style>{`
+      body > div,
+      body > div > div,
+      body > div > div > div.login-form {
+        height: 100%;
+      }
+    `}</style>
 
+        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              Sign in 
+        </Header>
+
+            <Form size='large'>
+              <Segment stacked>
+                <Form.Input 
+                  fluid icon='user' 
+                  iconPosition='left' 
+                  type="text"
+                  id='usernameInput'
+                  name='username'
+                  placeholder='username' 
+                  onChange={(e) => this.setState({ username: e.target.value })}
+                />
+                <Form.Input
+                  fluid icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                />
+
+                <Button 
+                  color='teal' 
+                  fluid size='large'
+                  onClick={() => signIn(username)}
+                  >
+                    Login
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+             New to us? 
+            <Link to='/users/signUp'>
+                <Button> 
+                  Sign Up
+                </Button>
+              </Link>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </div>
     )
+    }
   }
-}
+
+

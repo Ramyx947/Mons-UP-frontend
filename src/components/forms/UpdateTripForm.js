@@ -10,12 +10,13 @@ import { withRouter } from 'react-router-dom'
 
 class UpdateTripForm extends Component {
   state = {
-   title: '',
-   start_date: '',
-   end_date: '',
-   number_days: '',
-   country: '',
-   city: ''
+   titleValue: this.props.trip.title,
+    startDateValue: this.props.trip.start_date,
+    endDateValue: this.props.trip.end_date,
+    numberDaysValue: this.props.trip.number_days,
+    countryValue: this.props.trip.country,
+    cityValue: this.props.trip.city,
+    categoryValue: this.props.trip.category
   }
   
   handleInputChange = (event) => {
@@ -37,8 +38,9 @@ this.UpdateTripForm(this.state)
 
 
   render() {
-    const { from, to } = this.state;
-    const modifiers = { start: from, end: to };
+    const { title, start_date, end_day } = this.state;
+    const { editTrip} = this.props
+  
     return (
       <div> 
        

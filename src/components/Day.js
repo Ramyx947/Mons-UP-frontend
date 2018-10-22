@@ -1,28 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button, Container, Grid } from 'semantic-ui-react'
 
-const Day = ({ day }) => {
+
+const Day = ({ day, deselectDay }) => {
 
   return(
-    <div className="day-details">
-        <h2>{day.title}</h2>
-      <h3>Start point:</h3>
-        <p>{day.start_point}</p>
-      <h3>End point:</h3>
-        <p> {day.end_point}</p>
-      <h3>Distance:</h3>
-        <p> {day.distance}</p>
-      <h3>Notes:</h3>
-        <p> {day.notes}</p>
-      <div>
-        {/* <Link to={`/`} */}
-        <button> Edit day </button>
+    // console.log('Day props:', this.props)
+    <div className="day-details"
+      onClick={deselectDay}>
+      <Grid>
+        <Grid.Row>
 
-
-        {/* <Link to={`/trips/${trip.id}/days/${day.id}`}>
-          <button onClick={() => selectDay(day)}>{day.title}</button>
-        </Link> */}
-      </div>
+         <h2>Day details:{day.title}</h2>
+                  <ul>
+                    <li> Start Point:{day.start_point}</li>
+                    <li> End Point:{day.end_point}</li>
+                    <li> Distance: {day.distance}</li>
+                    <li> Accommodation Type:{day.accommodation_type}</li>
+                    <li> Name: {day.name}</li>
+                    <li> Address: {day.address}</li>
+                  </ul>
+          </Grid.Row>
+      </Grid>
     </div>
    
   )

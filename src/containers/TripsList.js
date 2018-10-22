@@ -1,20 +1,29 @@
 import React from 'react'
 import TripCard from '../components/TripCard'
+import { Button, Container, Grid } from 'semantic-ui-react'
+
 
 const TripList = ({ trips, selectTrip }) => {
     return (
-      <div>
-        <h1>TRIP LIST</h1>
-        {
-          trips.map((trip) =>   
-            <TripCard
-              trip={trip}
-              key={trip.id}
-              handleClick={() => selectTrip(trip)}
-            />
-          )
-        }
-      </div>
+      <body>
+      <Grid>
+        <Grid.Column>  
+          <div>
+            <div className='trip-list'></div>
+            {
+              trips.map((trip) =>
+                <TripCard
+                  trip={trip}
+                  key={trip.id}
+                  handleClick={() => selectTrip(trip)}
+                />
+              )
+            }
+          </div>
+        </Grid.Column>
+      </Grid>
+      </body>
+      
     )
 }
 export default TripList

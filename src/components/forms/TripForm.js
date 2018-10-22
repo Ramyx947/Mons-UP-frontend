@@ -15,7 +15,9 @@ class TripForm extends Component {
    end_date: '',
    number_days: '',
    country: '',
-   city: ''
+   city: '',
+   category: '',
+   
   }
   
   handleInputChange = (event) => {

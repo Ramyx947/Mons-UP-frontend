@@ -1,9 +1,11 @@
 import React from 'react'
-import {Button, Segment} from 'semantic-ui-react'
+import {Button, Container, Grid, GridColumn } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import TripCard from './TripCard'
 import DaysList from '../containers/DaysList'
+import Day from './Day'
+
 
 export default class TripDetails extends React.Component {
 
@@ -31,7 +33,7 @@ export default class TripDetails extends React.Component {
 
 render(){
   const { trips, match } = this.props 
-  const { days, selectedDay} = this.state
+  const { days, selectedDay } = this.state
   const trip = trips.find(trip => {
     // console.log(trip.id)
     // console.log(match.params.id)
@@ -41,47 +43,59 @@ render(){
   // console.log('found trip:', trip)
 
   return(
-    <div>
-    <Segment> 
-    <h2> Trip details</h2>
-    <h1>Title: {trip.title}</h1>
-    <p> Start date: {trip.start_date}</p>
-    <p> End date: {trip.end_date}</p>
-    <p> Number of days: {trip.number_days}</p>
-    <p> Country: {trip.country}</p>
-    <p> City: {trip.city}</p>
-    <p> Category: {trip.category}</p>
-    <p> Difficulty: {trip.difficulty}</p>
-
-</Segment>
-<Segment secondary> 
-      <div className='day-list'>
+ <div className='trip-details'>
+   <Grid>
+     <Grid.Row>
+          <h2> Trip details:</h2>
+          <ul>
+            <li><h1>Title: {trip.title}</h1></li>
+            <li><p> Start date: {trip.start_date}</p></li>
+            <li><p> End date: {trip.end_date}</p></li>
+            <li><p> Number of days: {trip.number_days}</p></li>
+            <li><p> Country: {trip.country}</p></li>
+            <li><p> City: {trip.city}</p></li>
+            <li><p> Category: {trip.category}</p></li>
+            <li><p> Difficulty: {trip.difficulty}</p></li>
+          </ul>
+     </Grid.Row>
+     <Grid.Row>
+        <Grid.Column width={5}> 
           <DaysList
-            trip={trip}
-            days={this.state.days}
-            selectDay={this.selectDay}
-            deselectDay={this.deselectDay}
+              trip={trip}
+              days={this.state.days}
+              selectDay={this.selectDay}
           />
-      </div>
-  </Segment>
+       </Grid.Column>
+        <Grid.Column>
+         {
+            selectedDay ?
+              <Grid.Row>
+                <Day 
+                  day={selectedDay}
+                  deselectDay={this.deselectDay}
+                />
+              </Grid.Row>
+            :
+              <Grid.Row>
+                <div />
+              </Grid.Row>
+          }
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row> 
+            <div className='buttons'>
 
-  <Segment tertiary> 
-    <div className='buttons'>
-        <Link to={'/trips/new'}>
-          <Button> Create a new trip</Button>
-        </Link>
-        <Link to={'/trips/${trip.id}/update'}>
-          <Button> Edit trip</Button>
-        </Link>
-        <Link to={'/trips'} >
-          <Button > Back to trips</Button>
-        </Link>
-        <Link to={`/trips/${trip.id}`}> 
-         <Button> Delete trip</Button>
-        </Link>
+                <Link to={'/trips/${trip.id}/update'}>
+                  <Button> Edit trip</Button>
+                </Link>
+
+                <Link to={`/trips/${trip.id}`}> 
+                  <Button> Delete trip</Button>
+                </Link>
+            </div>
+      </Grid.Row>
+    </Grid>
     </div>
-</Segment>
-  </div>
-    )
+      )
+    }
   }
-}
