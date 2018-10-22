@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Grid } from 'semantic-ui-react'
+import { Button, Container, Grid, Form, TextArea } from 'semantic-ui-react'
 
 
 const Day = ({ day, deselectDay }) => {
@@ -11,7 +11,6 @@ const Day = ({ day, deselectDay }) => {
       onClick={deselectDay}>
       <Grid>
         <Grid.Row>
-
          <h2>Day details:{day.title}</h2>
                   <ul>
                     <li> Start Point:{day.start_point}</li>
@@ -20,7 +19,12 @@ const Day = ({ day, deselectDay }) => {
                     <li> Accommodation Type:{day.accommodation_type}</li>
                     <li> Name: {day.name}</li>
                     <li> Address: {day.address}</li>
+                    <li><p>Notes: </p></li>
                   </ul>
+                  
+                  <Form>
+                      <TextArea autoHeight placeholder='Add your notes:' rows={2} />
+                  </Form>
           </Grid.Row>
       </Grid>
     </div>

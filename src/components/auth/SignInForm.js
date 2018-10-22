@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Button, Form, Grid, Header, Message, Segment, Input, Image} from 'semantic-ui-react'
 
-import { Button, Form, Grid, Header, Image, Message, Segment, Input} from 'semantic-ui-react'
 
 export default class SignInForm extends React.Component {
   state = {
@@ -13,11 +13,6 @@ export default class SignInForm extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
-
-  // handleSubmit = () => {
-  //   const {username} this.state
-  //   this.props.signIn(name, password)
-  // }
 
   render () {
     const { username, password } = this.state
@@ -37,8 +32,9 @@ export default class SignInForm extends React.Component {
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-              Sign in 
-        </Header>
+              <Image src='/src/monsUpLogo.png' size='small' alt="logo"/> 
+              Log-in to your account
+            </Header>
 
             <Form size='large'>
               <Segment stacked>
@@ -68,7 +64,7 @@ export default class SignInForm extends React.Component {
               </Segment>
             </Form>
             <Message>
-             New to us? 
+             New with us ?  
             <Link to='/users/signUp'>
                 <Button> 
                   Sign Up

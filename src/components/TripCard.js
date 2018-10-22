@@ -1,5 +1,5 @@
 import React from 'react'
-import {Divider, Image} from 'semantic-ui-react'
+import {Divider, Card, Image} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import { SyncLoopHook } from 'tapable';
@@ -32,22 +32,31 @@ const TripCard = ({ trip, handleClick }) => {
 
   }
   return(
-    <Link to={`/trips/${trip.id}`}>
+    <Card>
+      <Card.Content>
+         <Link to={`/trips/${trip.id}`}>
+     
+    <img style={{ width: '100%' }} src={imageUrl} />
       <div className='ui eight wide column'
         key={trip.id}
         onClick={handleClick}
-      >
+        >
+        <Card.Header>
         <span 
         style={{ fontWeight: 'bold', fontSize: '30px' }}>
         {trip.title}
         </span>
-            <img style={{ width: '100%' }} src={imageUrl} />
+        </Card.Header>
+            <Card.Description>
             <p> Start date: {trip.start_date}</p>
             <p> End date: {trip.end_date}</p>
             <p> Country: {trip.country}</p>
             <p> City: {trip.city}</p>
+            </Card.Description>
       </div>
     </Link>
+      </Card.Content>
+    </Card>
   )
 }
    

@@ -5,7 +5,7 @@ import { Button, Container, Grid } from 'semantic-ui-react'
 
 const TripList = ({ trips, selectTrip }) => {
     return (
-      <body>
+
       <Grid>
         <Grid.Column>  
           <div>
@@ -22,7 +22,7 @@ const TripList = ({ trips, selectTrip }) => {
           </div>
         </Grid.Column>
       </Grid>
-      </body>
+
       
     )
 }

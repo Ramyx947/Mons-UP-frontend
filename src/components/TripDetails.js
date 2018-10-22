@@ -47,8 +47,10 @@ render(){
    <Grid>
      <Grid.Row>
           <h2> Trip details:</h2>
+      </Grid.Row>
+      <Grid.Column width={5}>
+          <h1>Title: {trip.title}</h1>
           <ul>
-            <li><h1>Title: {trip.title}</h1></li>
             <li><p> Start date: {trip.start_date}</p></li>
             <li><p> End date: {trip.end_date}</p></li>
             <li><p> Number of days: {trip.number_days}</p></li>
@@ -57,33 +59,17 @@ render(){
             <li><p> Category: {trip.category}</p></li>
             <li><p> Difficulty: {trip.difficulty}</p></li>
           </ul>
-     </Grid.Row>
-     <Grid.Row>
-        <Grid.Column width={5}> 
-          <DaysList
-              trip={trip}
-              days={this.state.days}
-              selectDay={this.selectDay}
-          />
-       </Grid.Column>
-        <Grid.Column>
-         {
-            selectedDay ?
-              <Grid.Row>
-                <Day 
-                  day={selectedDay}
-                  deselectDay={this.deselectDay}
-                />
-              </Grid.Row>
-            :
-              <Grid.Row>
-                <div />
-              </Grid.Row>
-          }
-        </Grid.Column>
-      </Grid.Row>
+     </Grid.Column>
+      <Grid.Row>
+            <Grid.Column width={5}> 
+              <DaysList
+                  trip={trip}
+                  days={this.state.days}
+                  selectDay={this.selectDay}
+              />
+          </Grid.Column>
+        </Grid.Row>
       <Grid.Row> 
-            <div className='buttons'>
 
                 <Link to={'/trips/${trip.id}/update'}>
                   <Button> Edit trip</Button>
@@ -92,7 +78,6 @@ render(){
                 <Link to={`/trips/${trip.id}`}> 
                   <Button> Delete trip</Button>
                 </Link>
-            </div>
       </Grid.Row>
     </Grid>
     </div>

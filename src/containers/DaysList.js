@@ -1,7 +1,8 @@
 import React from 'react'
 import Day from '../components/Day'
 import { Route, Switch, Link } from 'react-router-dom'
-import { List, Accordion, Icon  } from 'semantic-ui-react'
+import { Accordion, Icon, Grid, GridColumn  } from 'semantic-ui-react'
+
 
 export default class DaysList extends React.Component {
   state = {
@@ -21,24 +22,25 @@ export default class DaysList extends React.Component {
 
     return (
       <div className='day-list'>
+        <Accordion fluid styled>
         {
-          days.map(day =>
-              
-                <Accordion fluid styled>
-                <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+          days.map((day, i) =>
+
+              <>
+                <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
                   <Icon name='dropdown' />
                     <Link to={`/trips/${trip.id}/days/${day.id}`}>
                       {day.title}
                     </Link>
                   </Accordion.Title>
-
-                  <Accordion.Content active={activeIndex === 0}>
+                  <Accordion.Content active={activeIndex === i}>
                     <Day day={day}/>
                   </Accordion.Content>
-                  </Accordion>
+              </>
 
           )
-        }
+          }
+        </Accordion>
 
         <Switch>
           <Route path='/trips/:trip_id/days/:id' render={props => <Day day={days.find(d => d.id === parseInt(props.match.params.id, 10))} {...props} />} />
@@ -47,8 +49,3 @@ export default class DaysList extends React.Component {
     )
   }
 }
-
-// trip = { trip }
-// days = { this.state.days }
-// selectDay = { this.selectDay }
-// deselectDay = { this.deselectDay }
