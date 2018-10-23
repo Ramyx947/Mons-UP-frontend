@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Menu } from 'semantic-ui-react'
 import TripCard from './TripCard'
 import SignInForm from './auth/SignInForm'
-const monsUpLogo = require('../monsUpLogo.png')
+const monsUpLogo = require('../images/monsUpLogo.png')
 // import MyAccount from './components/MyAccount'
 
 
@@ -23,18 +23,19 @@ class NavBar extends React.Component {
          this.props.currentUser ? 
                 (
                   <div>
+                    <Image src={monsUpLogo} alt='' />
                     <h3>{currentUser.username && `Hello, ${currentUser.username}`} </h3>
+                    <Button.Group>
                       <Link to='/trips'> 
-                       <button>See your trips</button>
-                      </Link>
-                      
-                      <Link to='/users/signOut'>
-                          <button onClick={this.props.signOut}>Sign out</button>
+                         <Button basic color='red'>See your trips</Button>
                       </Link>
                       <Link to={'/trips/new'}>
-                        <button> Create a new trip</button>
+                        <Button basic color='blue'> Create a new trip</Button>
                       </Link>
-                
+                      <Link to='/users/signOut'>
+                        <Button onClick={this.props.signOut} basic color='green'>Sign out</Button>
+                      </Link>
+                  </Button.Group>
                   </div>
   )
 :

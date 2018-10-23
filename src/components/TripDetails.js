@@ -32,7 +32,7 @@ export default class TripDetails extends React.Component {
   }
 
 render(){
-  const { trips, match } = this.props 
+  const { trips, match, removeTrip } = this.props 
   const { days, selectedDay } = this.state
   const trip = trips.find(trip => {
     // console.log(trip.id)
@@ -70,14 +70,17 @@ render(){
           </Grid.Column>
         </Grid.Row>
       <Grid.Row> 
+<Button.Group colour='yellow'>
+
 
                 <Link to={'/trips/${trip.id}/update'}>
                   <Button> Edit trip</Button>
                 </Link>
 
-                <Link to={`/trips/${trip.id}`}> 
-                  <Button> Delete trip</Button>
+          <Link to={'/trips'}> 
+              <Button onClick={() => { removeTrip(trip)}}> Delete trip</Button>
                 </Link>
+          </Button.Group>
       </Grid.Row>
     </Grid>
     </div>

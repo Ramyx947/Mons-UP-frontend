@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DayPicker from 'react-day-picker';
-import { Button } from 'semantic-ui-react'
+import { Button, Form, Label} from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom'
 
@@ -9,113 +9,109 @@ import 'react-day-picker/lib/style.css';
 import { withRouter } from 'react-router-dom'
 
 class UpdateTripForm extends Component {
+
   state = {
-   titleValue: this.props.trip.title,
+    titleValue: this.props.trip.title,
     startDateValue: this.props.trip.start_date,
     endDateValue: this.props.trip.end_date,
-    numberDaysValue: this.props.trip.number_days,
     countryValue: this.props.trip.country,
     cityValue: this.props.trip.city,
-    categoryValue: this.props.trip.category
-  }
+    categoryValue: this.props.trip.category,
+    difficultyValue: this.props.trips.difficulty,
   
-  handleInputChange = (event) => {
-    this.setState({
-       title: event.target.children[0].value,
-       start_date: event.target.childrem[1].value,
-       end_date: event.target.childrem[2].value,
-       number_days: event.target.childrem[3].value,
-       country: event.target.childrem[4].value,
-       city: event.target.childrem[5].value
-    })
   }
 
+    handleOnSubmit = (title, startDate, endDate, numberDays, country, city, category) => {
+      event.preventDefault()
+        fetch(`http://localhost:3000/api/v1/trips/${trip.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+            body: JSON.stringify({
+              user_id: JSON.parse(localStorage.getItem('user')).id,
+              title: this.state.titleValue,
+              start_date: this.state.startDateValue,
+              end_date: this.state.endDateValue,
+              country: this.state.countryValue,
+              city: this.state.cityValue,
+              category: this.state.categoryValue,
+              difficulty: this.state.dthis.state.ifficultyValue
+            }),
+        }
+        )
+        .then(res => res.json()
+        .then(updateTrip => this.setState())
+    }
 
-handleSubmit = (event) => {
-event.preventDefault()
-this.UpdateTripForm(this.state)
-}
-
+  handleChangeTitle = (e, { value }) => this.setState({ title: value })
+  handleChangeStart_date = (e, { value }) => this.setState({ start_date: value })
+  handleChangeEnd_date = (e, { value }) => this.setState({ end_date: value })
+  handleChangeCountry = (e, { value }) => this.setState({ country: value })
+  handleChangeCity = (e, { value }) => this.setState({ city: value })
+  handleChangeDifficulty = (e, { value }) => this.setState({ difficulty: value })
+ 
 
   render() {
-    const { title, start_date, end_day } = this.state;
+
     const { editTrip} = this.props
   
     return (
-      <div> 
-       
-      <form onSubmit={this.handleOnSubmit}>
-          <h2>Update trip</h2>
-        <p>
-          <label> Title:</label>
-          <input
-            type='text'
-            name='title'
-            value={this.state.title}
-            onChange={this.handleInputChange}
-            placeholder='Trip title'
-          />
-        </p>
-        <p>
-          <p> Dates:</p>
-          <label> Start date</label>
-        <input
-          type='date'
-          value={this.state.start_date}
-          name='start_date'
-          onChange={this.handleInputChange}
-          placeholder='Start date (YYYY-MM-DD)'
-        />
-        </p>
-        <p>
-        <label> End date:</label>
-        <input
-          type='date'
-          value={this.state.end_date}
-          name='end_date'
-          onChange={this.handleInputChange}
-          placeholder='End date (YYYY-MM-DD)'
-        />
-        </p>
-        <p>
-        </p>
-        <input
-          type='text'
-          value={this.state.number_days}
-          name='number_days'
-          onChange={this.handleInputChange}
-          placeholder='Total number of days'
-        />
-        <p>
-          <input
-            type='text'
-            value={this.state.country}
-            name='country'
-            onChange={this.handleInputChange}
-            placeholder='Country'
-          />
-        </p>
-        <p>
-          <input
-            type='text'
-            value={this.state.city}
-            name='city'
-            onChange={this.handleInputChange}
-            placeholder='City'
-          />
-        </p>
-        <input type='submit'
-          onClick={(event) => {event.preventDefault()
-          this.props.updateTrip()}}
-        />
-      </form>
-        <Link to={'/trips'} >
-          <Button > Back to trips</Button>
+      
+
+      <Form>
+        <h2>Update trip</h2>
+       <Form.Group>
+          <Form.Input defaultValue={this.props.trip.title} label='title' placeholder='Title' on Change={this.handleChangeTitle} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input defaultValue={this.props.trip.start_date} label='start_date' placeholder='Start date' on Change={this.handleChangeStart_date} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input defaultValue={this.props.trip.end_date} label='end_date' placeholder='end_date' on Change={this.handleChangeEnd_date} />
+        </Form.Group>
+       <Form.Group>
+          <Form.Input defaultValue={this.props.trip.country} label='country' placeholder='country' on Change={this.handleChangeCountry} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input defaultValue={this.props.trip.city} label='city' placeholder='city' on Change={this.handleChangeCity} />
+        </Form.Group>
+        <Form.Group>
+          <Label> Difficulty level:</Label>
+            <Form.Radio 
+              label='beginner'
+              value='beginner'
+              checked={this.state.difficulty === 'beginner'}
+              onChange={this.handleChangeDifficulty}
+            />
+            <Form.Radio
+              label='moderate'
+              value='moderate'
+              checked={this.state.difficulty === 'moderate'}
+              onChange={this.handleChangeDifficulty}
+            />
+            <Form.Radio
+              label='challenging'
+              value='challenging'
+              checked={this.state.difficulty === 'challenging'}
+              onChange={this.handleChangeDifficulty}
+            />
+        </Form.Group>
+
+        <Link to='/trips'>
+        <Form.Button
+          onClick={() => this.handleOnSubmit(this.state.title, )}>
+        Save Trip 
+        </Form.Button>
         </Link>
-      </div>
+        <Link to={'/trips'} >
+          <Button color='green'> Back to trips</Button>
+        </Link>
+      </Form>
     )
   }
 }
 
 export default UpdateTripForm
-       

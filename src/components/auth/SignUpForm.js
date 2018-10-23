@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-
-
+// const monsUpLogo = require('../src/images/monsUpLogo.png')
+// const monsUpLogo = require('../images/monsUpLogo.png')
 export default class SignUpForm extends React.Component {
   state = {
     username: undefined,
@@ -18,6 +18,7 @@ export default class SignUpForm extends React.Component {
 
       return (
         <div className='signup-form'>
+          {/* <Image src={monsUpLogo} alt='' /> */}
           <style>{`
       body > div,
       body > div > div,
@@ -72,40 +73,4 @@ export default class SignUpForm extends React.Component {
       )
     }
   }
-//     return (
-//       <div class="login-page">
-//         <div class="form">
-//           <form class="register-form">
-//             <label> Username:</label>
-//           <input
-//             id='nameInput'
-//             value={username}
-//             onChange={this.handleChange}
-//             margin='normal'
-//             name='username'
-//             color='primary'
-//           />
-//           <br />
-//           <label> Password:</label>
-//         <input
-//           id='password'
-//           value={password}
-//           onChange={this.handleChange}
-//           margin='normal'
-//           name='password'
-//           color='primary'
-//         />
-//         <br />
-//         <button onClick={() => this.props.signIn(username, password)}
-//           variant='contained'
-//           color='primary'>
-//           SIGN UP
-//         </button>
-//           </form>
-//         </div>
-//       </div>
-      
-//     )
-//   }
-// }
-
+  

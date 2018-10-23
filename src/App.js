@@ -11,7 +11,7 @@ import TripDetails from './components/TripDetails'
 import BrowsePublicTrips from './components/BrowsePublicTrips'
 import NavBar from './components/NavBar'
 import MyAccount from './components/MyAccount'
-import TripForm from './components/forms/TripForm'
+import NewTripForm from './components/forms/NewTripForm'
 import UpdateTripForm from './components/forms/UpdateTripForm'
 import SignInForm from './components/auth/SignInForm'
 import SignUpForm from './components/auth/SignUpForm'
@@ -98,7 +98,9 @@ editTripState=(trip) =>{
     newTrips.splice(indexOfTripToChange, 1, trip)
   this.setState({trips: newTrips})
 }
-
+  removeTrip = (id) => {
+    this.setState({ trips: this.state.trips.filter(trip => trip !==id)})
+  }
 render () {
    
     const { trips, selectedTrip, currentUser} = this.state
@@ -125,11 +127,11 @@ render () {
               <Route exact path='/users/signOut' render={props => <SignInForm signIn={signIn} signOut={this.signOut} {...props} />} />
               <Route exact path='/trips/browse_public_trips' render={props => <BrowsePublicTrips signOut={signOut} {...props} />} />
 
-              <Route exact path='/trips/new' render={props => <TripForm {...props} />} />
+              <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
               <Route exact path='/trips/${trip.id}/edit' render={props => <UpdateTripForm editTrip={editTrip}{...props} />} />
 
               <Route exact path='/trips' render={props => <TripsList trips={this.state.trips} selectTrip={this.selectTrip} {...props} />} />
-              <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} {...props} />} />
+            <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} removeTrip={this.removeTrip} {...props} />} />
               <Route exact path='/myaccount' render={props => <MyAccount currentUser={currentUser} trips={trips} {...props}/>} />
             </Switch> 
         </div>

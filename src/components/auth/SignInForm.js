@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Button, Form, Grid, Header, Message, Segment, Input, Image} from 'semantic-ui-react'
+import { Button, Form, Grid, Input, Image, Header, Segment, Message } from 'semantic-ui-react'
+
 
 
 export default class SignInForm extends React.Component {
@@ -13,6 +14,7 @@ export default class SignInForm extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
+  
 
   render () {
     const { username, password } = this.state
@@ -21,6 +23,7 @@ export default class SignInForm extends React.Component {
     console.log('SignInForm props:', this.props)
     return (
       <div className='signin-form'>
+        
         <style>{`
       body > div,
       body > div > div,
@@ -30,6 +33,7 @@ export default class SignInForm extends React.Component {
     `}</style>
 
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+          {/* <Image src={monsUpLogo} alt='' /> */}
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
               <Image src='/src/monsUpLogo.png' size='small' alt="logo"/> 
