@@ -19,7 +19,7 @@ const Day = ({ day, deselectDay }) => {
                     <li> Accommodation Type:{day.accommodation_type}</li>
                     <li> Name: {day.name}</li>
                     <li> Address: {day.address}</li>
-                    <li><p>Notes: </p></li>
+                    {/* <li><p>Notes: </p></li> */}
                   </ul>
                   
                   <Form>

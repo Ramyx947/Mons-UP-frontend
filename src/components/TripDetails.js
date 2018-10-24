@@ -49,6 +49,7 @@ render(){
           <h2> Trip details:</h2>
       </Grid.Row>
       <Grid.Column width={5}>
+          <div className='inner-border'>
           <h1>Title: {trip.title}</h1>
           <ul>
             <li><p> Start date: {trip.start_date}</p></li>
@@ -59,6 +60,7 @@ render(){
             <li><p> Category: {trip.category}</p></li>
             <li><p> Difficulty: {trip.difficulty}</p></li>
           </ul>
+          </div>
      </Grid.Column>
       <Grid.Row>
             <Grid.Column width={5}> 
@@ -71,14 +73,12 @@ render(){
         </Grid.Row>
       <Grid.Row> 
 <Button.Group colour='yellow'>
-
-
-                <Link to={'/trips/${trip.id}/update'}>
+                <Link to={`/trips/${trip.id}/edit`}>
                   <Button> Edit trip</Button>
                 </Link>
 
           <Link to={'/trips'}> 
-              <Button onClick={() => { removeTrip(trip)}}> Delete trip</Button>
+              <Button onClick={() => {removeTrip(trip.id)}}> Delete trip</Button>
                 </Link>
           </Button.Group>
       </Grid.Row>

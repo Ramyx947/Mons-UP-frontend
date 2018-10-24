@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { SyncLoopHook } from 'tapable';
 
 
-const TripCard = ({ trip, handleClick }) => {
+const TripCard = ({ selectTrip, trip, handleClick }) => {
   console.log("TRIP", trip)
   let imageUrl
   switch (trip.title) {
@@ -39,7 +39,7 @@ const TripCard = ({ trip, handleClick }) => {
     <img style={{ width: '100%' }} src={imageUrl} />
       <div className='ui eight wide column'
         key={trip.id}
-        onClick={handleClick}
+        onClick={()=> selectTrip(trip.id)}
         >
         <Card.Header>
         <span 

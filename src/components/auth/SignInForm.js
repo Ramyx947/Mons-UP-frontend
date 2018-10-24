@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button, Form, Grid, Input, Image, Header, Segment, Message } from 'semantic-ui-react'
-
+const monsUpLogo = require('../../images/monsUpLogo.png')
 
 
 export default class SignInForm extends React.Component {
@@ -22,7 +22,7 @@ export default class SignInForm extends React.Component {
     const {signIn, signUp} = this.props
     console.log('SignInForm props:', this.props)
     return (
-      <div className='signin-form'>
+      <div className='sign-in' >
         
         <style>{`
       body > div,
@@ -36,7 +36,7 @@ export default class SignInForm extends React.Component {
           {/* <Image src={monsUpLogo} alt='' /> */}
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-              <Image src='/src/monsUpLogo.png' size='small' alt="logo"/> 
+              <Image src={monsUpLogo} alt='' />
               Log-in to your account
             </Header>
 

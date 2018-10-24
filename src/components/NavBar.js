@@ -18,11 +18,11 @@ class NavBar extends React.Component {
 
     <Menu>
         
-      <div >
+      <div className='nav'>
         {
          this.props.currentUser ? 
                 (
-                  <div>
+                  <div className='logo'>
                     <Image src={monsUpLogo} alt='' />
                     <h3>{currentUser.username && `Hello, ${currentUser.username}`} </h3>
                     <Button.Group>

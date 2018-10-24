@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-// const monsUpLogo = require('../src/images/monsUpLogo.png')
-// const monsUpLogo = require('../images/monsUpLogo.png')
+
+ const monsUpLogo = require('../../images/monsUpLogo.png')
 export default class SignUpForm extends React.Component {
   state = {
     username: undefined,
@@ -17,8 +17,8 @@ export default class SignUpForm extends React.Component {
     const { username, password } = this.state
 
       return (
-        <div className='signup-form'>
-          {/* <Image src={monsUpLogo} alt='' /> */}
+        <div className='signup-form auth'>
+          <Image src={monsUpLogo} alt='' />
           <style>{`
       body > div,
       body > div > div,

@@ -1,66 +1,36 @@
+
 body {
-  margin: 20;
-  padding: 20;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+ 
+    z-index: 1;
+    background-color: hsla(0,0%,100%,0.70);
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-
-}
-
-/* 
-
-.trip-list {
-  margin: 20;
-  padding: 20;
-}
-.grid {
-  display: grid;
-  grid-template-columns: 150px auto 150px;
-  grid-gap: 1em;
-}
-header, footer {
-  grid-column: 1 / 4;
-}
-header,
-main,
-aside,
-footer {
-  background: #eaeaea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-html, body {
-  height: 100%;
-}
-.container {
-  display: flex; 
-}
-
-header,
-footer {
-  grid-column: 1 / span 2;
-}
-
-.nav-bar {
-  margin: 5px;
-  padding: 10px;
-}
-.stitched {
-   padding: 20px;
-   margin: 10px;
-   background: lightcyan;
-   color: black;
-   font-size: 15px;
-   font-weight: bold;
-   line-height: 1.3em;
   
-   border-radius: 10px;
-   box-shadow: 0 0 0 4px lightblue, 2px 1px 6px 4px;
-   text-shadow: -1px -1px #202020;
-   font-weight: normal;
 }
 
+.form {
+ background: url(https://media.tenor.com/images/d38ab72dcd72dabfc6e6b80f6efbc638/tenor.gif);
+  height: 200%;
+  width: 100%;
+  padding: 40px;
+  max-width:600px;
+  margin:40px auto;
+  border-radius:$br;
+  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
+}
+
+.nav {
+  
+}
+.logo {
+ 
+}
+#root {
+  min-height: 100%
+}
 
 a:link, a:visited {
     color: black;
@@ -79,13 +49,4 @@ ul {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.form {
-  background:rgba($form-bg,.9);
-  padding: 40px;
-  max-width:600px;
-  margin:40px auto;
-  border-radius:$br;
-  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
-} */
+} 

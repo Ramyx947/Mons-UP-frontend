@@ -19,19 +19,18 @@ export default class DaysList extends React.Component {
   render() {
         const { days, selectDay, trip} = this.props
         const { activeIndex } = this.state
-
+    console.log('DayList props:', this.props)
     return (
       <div className='day-list'>
         <Accordion fluid styled>
         {
           days.map((day, i) =>
-
               <>
                 <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
                   <Icon name='dropdown' />
-                    <Link to={`/trips/${trip.id}/days/${day.id}`}>
+                    {/* <Link to={`/trips/${trip.id}/days/${day.id}`}> */}
                       {day.title}
-                    </Link>
+                    {/* </Link> */}
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === i}>
                     <Day day={day}/>
@@ -48,4 +47,8 @@ export default class DaysList extends React.Component {
       </div>
     )
   }
+}
+
+DaysList.defaultProps = {
+  days: []
 }

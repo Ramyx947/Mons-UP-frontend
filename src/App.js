@@ -2,13 +2,12 @@ import React from 'react'
 import { Container, Header, Menu, Segment, Icon, Button, Divider } from 'semantic-ui-react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import MenuDropDown from './components/MenuDropDown'
-
+import Loading from './components/Loading'
 
 import TripsList from './containers/TripsList'
 import TripCard from './components/TripCard'
 import TripDetails from './components/TripDetails'
 
-import BrowsePublicTrips from './components/BrowsePublicTrips'
 import NavBar from './components/NavBar'
 import MyAccount from './components/MyAccount'
 import NewTripForm from './components/forms/NewTripForm'
@@ -34,6 +33,8 @@ class App extends React.Component {
   }
 
   selectTrip = (id) => {
+    let trip = this.state.trips.find(trip => trip.id === parseInt(id, 10))
+    this.setState({selectedTrip: trip})
     return this.state.trips.find(trip => trip.id === parseInt(id, 10))
   }
 
@@ -99,14 +100,18 @@ editTripState=(trip) =>{
   this.setState({trips: newTrips})
 }
   removeTrip = (id) => {
-    this.setState({ trips: this.state.trips.filter(trip => trip !==id)})
+    this.setState({ trips: this.state.trips.filter(trip => trip.id !==id)})
+    return fetch(`http://localhost:3000/api/v1/trips/${id}`, {
+      method: 'DELETE'})
   }
+
 render () {
    
     const { trips, selectedTrip, currentUser} = this.state
-    const { selectTrip, deselectTrip, createUser, signIn, signOut, editTrip } = this
-
+    const { selectTrip, deselectTrip, createUser, signIn, signOut, editTrip, removeTrip } = this
+  console.log("selectedTRIP", this.state.selectedTrip)
   return (
+
     <div className='ui grid container'>
       <header> MonsUP </header>
       <Container>
@@ -120,19 +125,15 @@ render () {
 
         <div className='trip-details'>
             <Switch>
-              <Route exact path='/' render={props => <HomePage  {...props} />} />
-              <Route exact path='/users/signIn' render={props => <SignInForm signIn={signIn} {...props} />} />
-              <Route exact path='/users/signUp' render={props => <SignUpForm signIn={signIn} {...props} />} />
-
-              <Route exact path='/users/signOut' render={props => <SignInForm signIn={signIn} signOut={this.signOut} {...props} />} />
-              <Route exact path='/trips/browse_public_trips' render={props => <BrowsePublicTrips signOut={signOut} {...props} />} />
-
-              <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
-              <Route exact path='/trips/${trip.id}/edit' render={props => <UpdateTripForm editTrip={editTrip}{...props} />} />
-
-              <Route exact path='/trips' render={props => <TripsList trips={this.state.trips} selectTrip={this.selectTrip} {...props} />} />
-            <Route path='/trips/:id' render={props => <TripDetails trips={this.state.trips} removeTrip={this.removeTrip} {...props} />} />
-              <Route exact path='/myaccount' render={props => <MyAccount currentUser={currentUser} trips={trips} {...props}/>} />
+            <Route exact path='/' render={props => <HomePage  {...props} />} />
+            <Route exact path='/users/signIn' render={props => <SignInForm signIn={signIn} {...props} />} />
+            <Route exact path='/users/signUp' render={props => <SignUpForm signIn={signIn} {...props} />} />
+            <Route exact path='/users/signOut' render={props => <SignInForm signIn={signIn} signOut={this.signOut} {...props} />} />
+            <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
+            <Route exact path='/trips/:id/edit' render={props => <UpdateTripForm trip={selectedTrip} editTrip={editTrip}{...props} />} />
+            <Route exact path='/trips' render={props => trips ? <TripsList trips={trips} selectTrip={selectTrip} {...props} /> : <Loading /> }/>
+            <Route exact path='/trips/:id' render={props => trips ? <TripDetails trips={trips} removeTrip={removeTrip} {...props} />  : <Loading /> } />
+            <Route exact path='/myaccount' render={props => trips ? <MyAccount currentUser={currentUser} trips={trips} {...props} /> : <Loading /> } />
             </Switch> 
         </div>
       </Container>

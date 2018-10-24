@@ -15,7 +15,7 @@ const TripList = ({ trips, selectTrip }) => {
                 <TripCard
                   trip={trip}
                   key={trip.id}
-                  handleClick={() => selectTrip(trip)}
+                  selectTrip = {selectTrip}
                 />
               )
             }

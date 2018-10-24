@@ -9,7 +9,7 @@ class HomePage extends Component {
   }
   render () {
     return (
-      <div className='HomePage'>
+      <div className='home-bg'>
         <h1>HOME PAGE!</h1>
         <TripList />
         <br/>
