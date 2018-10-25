@@ -43,7 +43,7 @@ class NewTripForm extends Component {
 
 
   handleOnSubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     fetch('http://localhost:3000/api/v1/trips', 
       {
         method: 'POST',
@@ -94,7 +94,7 @@ class NewTripForm extends Component {
     
     const dayDetails = (
       <Form>
-        <Form.Group widths={6}>
+        <Form.Group >
           <Form.Input
             label='Title'
             placeholder='Day title'
@@ -102,7 +102,7 @@ class NewTripForm extends Component {
             onChange={this.handleChangeDayTitle}
           />
         </Form.Group>
-        <Form.Group widths={2}>
+        <Form.Group>
           <Form.Input
             label='Start point'
             placeholder='Start point'
@@ -110,7 +110,7 @@ class NewTripForm extends Component {
             onChange={this.handleChangeStart_point}
           />
         </Form.Group>
-        <Form.Group widths={2}>
+        <Form.Group >
           <Form.Input
             label='End point'
             placeholder='End point'
@@ -118,7 +118,7 @@ class NewTripForm extends Component {
             onChange={this.handleChangeEnd_point}
           />
         </Form.Group>
-        <Form.Group widths={2}>
+        <Form.Group >
           <Form.Input
             label='Distance'
             placeholder='Distance'
@@ -141,6 +141,22 @@ class NewTripForm extends Component {
           <Form.Radio label='campsite' name='campsite' type='radio' value='campsite'
             checked={this.state.accommodation_type === 'campsite'}
             onChange={this.handleChangeAccommodationType}
+          />
+        </Form.Group>
+        <Form.Group widths={2}>
+          <Form.Input
+            label='Name'
+            placeholder='Name'
+            value={this.state.name}
+            onChange={this.handleChangeName}
+          />
+        </Form.Group>
+        <Form.Group widths={2}>
+          <Form.Input
+            label='Address'
+            placeholder='Address'
+            value={this.state.address}
+            onChange={this.handleChangeAddress}
           />
         </Form.Group>
       </Form>
@@ -195,7 +211,7 @@ class NewTripForm extends Component {
         </Form.Group>
 
         <Form.Group >
-          <Label> Difficulty level:</Label>
+          <Label color='blue'> Difficulty level:</Label>
           <Form.Radio
             label='beginner'
             value='beginner'
@@ -215,27 +231,31 @@ class NewTripForm extends Component {
             onChange={this.handleChangeDifficulty}
           />
         </Form.Group>
-
-          <Accordion as={Menu} vertical>
+         
+          <Accordion as={Menu} vertical width={1}>
             <Menu.Item>
+            
               <Accordion.Title
                 active={showDays}
                 content='Days'
                 onClick={toggleShowDays}
               />
-              <Accordion.Content active={showDays} content={dayDetails} widths={2}/>
+        
+              <Accordion.Content active={showDays} content={dayDetails}/>
+        
             </Menu.Item>
           </Accordion>
-
-        <Link to='/trips'>
-          <Form.Button
+        
+        <Link to={'/trips'}>
+          <Button
             basic color='red'
             type='submit'
             onClick={this.handleOnSubmit}
           >
             Create new trip
-        </Form.Button>
+          </Button>
         </Link>
+
         <Link to={'/trips'} >
           <Button color='green'> Back to trips</Button>
         </Link>

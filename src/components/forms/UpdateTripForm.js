@@ -8,22 +8,7 @@ import { withRouter } from 'react-router-dom'
 class UpdateTripForm extends Component {
  
   state = {
-    titleValue: this.props.trip.title,
-    startDateValue: this.props.trip.start_date,
-    endDateValue: this.props.trip.end_date,
-    countryValue: this.props.trip.country,
-    cityValue: this.props.trip.city,
-    categoryValue: this.props.trip.category,
-    difficultyValue: this.props.trip.difficulty,
-
-    dayTitle: this.props.days.title,
-    start_point: this.props.days.start_point,
-    end_point: this.props.days.end_point,
-    distance: this.props.days.distance,
-
-    accommodation_type: this.props.days.accommodation_type,
-    name: this.props.days.name,
-    address: this.props.days.address,
+    trip: { days: [] },
     showDays: true
   }
 
@@ -37,8 +22,8 @@ class UpdateTripForm extends Component {
           },
             body: JSON.stringify({
               user_id: JSON.parse(localStorage.getItem('user')).id,
-              title: this.state.titleValue,
-              start_date: this.state.startDateValue,
+              title: this.state.trip.title,
+              start_date: this.state.trip.start_date,
               end_date: this.state.endDateValue,
               country: this.state.countryValue,
               city: this.state.cityValue,
@@ -67,10 +52,14 @@ class UpdateTripForm extends Component {
             }
           )
         )
-
     }
 
-  handleChangeTitle = (e, { value }) => this.setState({ title: value })
+  handleChangeTitle = (e) => {
+    const trip = JSON.parse(JSON.stringify(this.state.trip))
+    trip.title = e.target.value
+    this.setState({ trip })
+  }
+
   handleChangeStart_date = (e, { value }) => this.setState({ start_date: value })
   handleChangeEnd_date = (e, { value }) => this.setState({ end_date: value })
   handleChangeCountry = (e, { value }) => this.setState({ country: value })
@@ -89,9 +78,14 @@ class UpdateTripForm extends Component {
   
   toggleShowDays = () => this.setState({ showDays: !this.state.showDays })
 
+  static getDerivedStateFromProps (props) {
+    const trip = JSON.parse(JSON.stringify(props.trips.find(trip => trip.id == parseInt(props.match.params.id)) || { days: [] } ))
+    trip.days = []
+    return { trip }
+  }
 
   render() {
-    
+    console.log(this.state)
 
     const { editTrip, trip, day} = this.props
     const { showDays } = this.state
@@ -99,11 +93,14 @@ class UpdateTripForm extends Component {
 
     const dayDetails = (
       <Form>
+        {
+          this.state.trip.days.map(day => <Form.Input value={day.title}></Form.Input>)
+        }
         <Form.Group widths={6}>
           <Form.Input
             label='Title'
             placeholder='Day title'
-            value={this.state.dayTitle}
+            value={this.state.trip.day}
             onChange={this.handleChangeTitle}
           />
         </Form.Group>
@@ -111,7 +108,7 @@ class UpdateTripForm extends Component {
           <Form.Input
             label='Start point'
             placeholder='Start point'
-            value={this.state.start_point}
+            value={this.state.trip.start_point}
             onChange={this.handleChangeStart_point}
           />
         </Form.Group>
@@ -119,7 +116,7 @@ class UpdateTripForm extends Component {
           <Form.Input
             label='End point'
             placeholder='End point'
-            value={this.state.End_point}
+            value={this.state.trip.end_point}
             onChange={this.handleChangeEnd_point}
           />
         </Form.Group>
@@ -127,7 +124,7 @@ class UpdateTripForm extends Component {
           <Form.Input
             label='Distance'
             placeholder='Distance'
-            value={this.state.Distance}
+            value={this.state.distance}
             onChange={this.handleChangeDistance}
           />
         </Form.Group>
@@ -148,6 +145,22 @@ class UpdateTripForm extends Component {
             onChange={this.handleChangeAccommodationType}
           />
         </Form.Group>
+        <Form.Group widths={2}>
+          <Form.Input
+            label='Name'
+            placeholder='Name'
+            value={this.state.name}
+            onChange={this.handleChangeName}
+          />
+        </Form.Group>
+        <Form.Group widths={2}>
+          <Form.Input
+            label='Address'
+            placeholder='Address'
+            value={this.state.address}
+            onChange={this.handleChangeAddress}
+          />
+        </Form.Group>
       </Form>
     )
     return (
@@ -157,7 +170,7 @@ class UpdateTripForm extends Component {
         <h2>Update trip</h2>
        <Form.Group>
           <Form.Input 
-            defaultValue={this.props.trip.title} 
+            defaultValue={this.state.trip.title} 
             label='title' 
             placeholder='Title' 
             onChange={this.handleChangeTitle} 
@@ -165,7 +178,8 @@ class UpdateTripForm extends Component {
         </Form.Group>
         <Form.Group>
           <Form.Input 
-            defaultValue={this.props.trip.start_date} 
+            value={this.state.trip.start_date}
+            defaultValue={this.state.trip.start_date}
             label='start_date' 
             placeholder='Start date' 
             onChange={this.handleChangeStart_date} 
@@ -259,6 +273,11 @@ class UpdateTripForm extends Component {
   </Segment>   
     )
   }
+}
+
+UpdateTripForm.defaultProps = {
+  trip: { days: [] },
+  days: {}
 }
 
 export default UpdateTripForm

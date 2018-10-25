@@ -48,7 +48,7 @@ class App extends React.Component {
       .then(trips => this.setState({ trips }))
   }
 
-  componentDidMount= () => {
+  componentDidMount = () => {
     this.getTrips()
   }
 
@@ -130,8 +130,8 @@ render () {
             <Route exact path='/users/signUp' render={props => <SignUpForm signIn={signIn} {...props} />} />
             <Route exact path='/users/signOut' render={props => <SignInForm signIn={signIn} signOut={this.signOut} {...props} />} />
             <Route exact path='/trips/new' render={props => <NewTripForm {...props} />} />
-            <Route exact path='/trips/:id/edit' render={props => <UpdateTripForm trip={selectedTrip} editTrip={editTrip}{...props} />} />
-            <Route exact path='/trips' render={props => trips ? <TripsList trips={trips} selectTrip={selectTrip} {...props} /> : <Loading /> }/>
+            <Route exact path='/trips/:id/edit' render={props => <UpdateTripForm trips={trips} editTrip={editTrip} {...props} />} />
+            <Route exact path='/trips' render={props => trips ? <TripsList getTrips={this.getTrips} trips={trips} selectTrip={selectTrip} {...props} /> : <Loading /> }/>
             <Route exact path='/trips/:id' render={props => trips ? <TripDetails trips={trips} removeTrip={removeTrip} {...props} />  : <Loading /> } />
             <Route exact path='/myaccount' render={props => trips ? <MyAccount currentUser={currentUser} trips={trips} {...props} /> : <Loading /> } />
             </Switch> 

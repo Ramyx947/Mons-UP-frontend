@@ -32,12 +32,12 @@ const TripCard = ({ selectTrip, trip, handleClick }) => {
 
   }
   return(
-    <Card>
+    <Card style={{ width: '100%' }}>
       <Card.Content>
          <Link to={`/trips/${trip.id}`}>
      
     <img style={{ width: '100%' }} src={imageUrl} />
-      <div className='ui eight wide column'
+      <div className='ui eight wide column' 
         key={trip.id}
         onClick={()=> selectTrip(trip.id)}
         >

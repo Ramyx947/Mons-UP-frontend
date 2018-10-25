@@ -11,26 +11,7 @@ body {
   
 }
 
-.form {
- background: url(https://media.tenor.com/images/d38ab72dcd72dabfc6e6b80f6efbc638/tenor.gif);
-  height: 200%;
-  width: 100%;
-  padding: 40px;
-  max-width:600px;
-  margin:40px auto;
-  border-radius:$br;
-  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
-}
 
-.nav {
-  
-}
-.logo {
- 
-}
-#root {
-  min-height: 100%
-}
 
 a:link, a:visited {
     color: black;
@@ -41,12 +22,30 @@ a:link, a:visited {
     text-decoration: none;
     display: inline-block;
 }
-ul {
+/* ul {
     list-style-type: circle;
     list-style-position: outside;
-    padding: 20px;
+    padding: 200px;
 }
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} 
+}  */
+/* .accordion-title span  {	
+    transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -ms-writing-mode: lr-tb;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+    margin-bottom: 0px;
+    line-height: 40px;
+}
+
+.accordion-content {
+    background-color: #ffffff;
+    color: #4c5157;
+    height: 144px;
+    width: 764px;
+    padding: 33px;
+} */ 

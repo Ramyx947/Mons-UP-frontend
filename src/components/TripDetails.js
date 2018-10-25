@@ -73,9 +73,9 @@ render(){
         </Grid.Row>
       <Grid.Row> 
 <Button.Group colour='yellow'>
-                <Link to={`/trips/${trip.id}/edit`}>
+                {/* <Link to={`/trips/${trip.id}/edit`}>
                   <Button> Edit trip</Button>
-                </Link>
+                </Link> */}
 
           <Link to={'/trips'}> 
               <Button onClick={() => {removeTrip(trip.id)}}> Delete trip</Button>
